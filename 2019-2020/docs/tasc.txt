@@ -1,0 +1,69 @@
+Documentation: tasc.cpp			
+Summary: Task machine manager for the flight computer. 			
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+
+-----------------Function Format--------------------------
+Function Declaration(param) by alphabetical order
+      Description
+      Parameters
+      Return or Exit Value
+ 
+-------------------------------------------------------------------------------------------------------------------------------
+void land (Autopilot_Interface &api)
+      Description: Set a waypoint before landing and a waypoint for touchdown. Add them the autopilot object's waypoints"
+      Parameters: api: Autopilot Interface object reference
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------
+void loiter (Autopilot_Interface &api)	
+      Description: Set a waypoint to loiter in and add it in a vector to the autopilot object's waypoints
+      Parameters: api: Autopilot Interface object reference	
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------
+void parse_commandline (int argc, char **argv, char *&uart_name, int &baudrate)	
+      Description: Read command line arguments and set baud rate and UART device
+      Parameters: argc: argument count
+                  argv: array of arguments
+                  uart_name: UART device ID
+                  baudrate: information transfer rate
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------      
+void payload_drop (Autopilot_Interface &api)
+      Description: Calculate and track time and location and drop the payload
+      Parameters: api: Autopilot Interface object reference
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------
+void quit_handler (int sig)	
+      Description: Catch quit signal and quit autopilot and serial connection
+      Parameters: sig: quit signal
+      Return: exit(0)
+-------------------------------------------------------------------------------------------------------------------------------
+void run_isr_thread ()
+      Description: Create ISR object and call object's start method
+      Parameters: N/A
+      Return: N/A
+-------------------------------------------------------------------------------------------------------------------------------
+void takeoff (Autopilot_Interface &api)
+      Description: Set takeoff waypoint, next waypoint, and loiter waypoint. Add them in a vector to the autopilot object's waypoints.
+                    Set flight mode to autonomous
+      Parameters: api: Autopilot Interface object reference
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------
+void TASC (Autopilot_Interface &api)
+      Description: Continuously checks mission status and changes state if mission message has changed. 
+                    Possible states:
+                    0: Wait
+                    1: Takeoff
+                    2: Loiter
+                    3: ISR Camera Search (Visible)
+                    4: Payload drop
+                    5: Land
+                    100: ISR Camera Search (IR)
+      Parameters: api: Autopilot Interface object reference
+      Return: return
+-------------------------------------------------------------------------------------------------------------------------------
+int top (int argc, char **argv)
+      Description: Establish serial connection and autopilot and start flight control
+      Parameters: argc: argument count
+                  argv: array of arguments"
+      Return: 0 (to quit)
